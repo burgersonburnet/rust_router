@@ -1,0 +1,23 @@
+[package]
+
+name = "hello_world_router"
+version = "0.0.1"
+authors = [ "Casey Billman <caseybillman@gmail.com>" ]
+
+[dependencies.iron]
+version = "*"
+
+[dependencies.time]
+version = "*"
+
+[dependencies.router]
+version = "*"
+
+[dependencies.staticfile]
+version = "*"
+
+[dependencies.mount]
+version = "*"
+
+#[dependencies.bodyparser]
+#git = "https://github.com/iron/body-parser.git"
