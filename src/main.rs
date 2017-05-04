@@ -12,7 +12,11 @@ use time::precise_time_ns;
 use staticfile::Static;
 use router::{Router, NoRoute};
 
+mod bonb_modules;
+
 use std::sync::atomic::{AtomicUsize, Ordering, ATOMIC_USIZE_INIT};
+
+/////////////////GLOBALS//////////////////
 
 static GLOBAL_THREAD_COUNT: AtomicUsize = ATOMIC_USIZE_INIT;
 
@@ -56,20 +60,17 @@ fn hello_world(_: &mut Request) -> IronResult<Response> {
 
 fn get_index(request: &mut Request) -> IronResult<Response> {
     let counter = GLOBAL_THREAD_COUNT.load(Ordering::SeqCst);
-    let react = Static {
-        root: Path::new("public/react/").to_path_buf()
-    };
-    let angular = Static {
-        root: Path::new("public/angular/index.html").to_path_buf()
-    };
+
+    let react = Static::new(Path::new("public/react/"));
+    let angular = Static::new(Path::new("public/angular/"));
 
     println!("{:?}", counter);
-    let res = if counter % 2 == 0 {
+
+    if counter % 2 == 0 {
         react.handle(request)
     } else {
         angular.handle(request)
-    };
-    res
+    }
 }
 
 // fn handler(req: &mut Request) -> IronResult<Response> {

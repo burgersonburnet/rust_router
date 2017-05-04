@@ -19,5 +19,8 @@ version = "*"
 [dependencies.mount]
 version = "*"
 
+[dependencies]
+juniper = { version = "0.7.0", features = ["iron-handlers"] }
+
 #[dependencies.bodyparser]
 #git = "https://github.com/iron/body-parser.git"
