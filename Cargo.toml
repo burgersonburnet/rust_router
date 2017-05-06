@@ -22,5 +22,8 @@ version = "*"
 [dependencies]
 juniper = { version = "0.7.0", features = ["iron-handlers"] }
 
+[dependencies]
+chrono = "0.3"
+
 #[dependencies.bodyparser]
 #git = "https://github.com/iron/body-parser.git"

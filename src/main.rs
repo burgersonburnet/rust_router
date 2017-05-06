@@ -1,5 +1,6 @@
 extern crate iron;
 extern crate time;
+extern crate chrono;
 extern crate router;
 extern crate staticfile;
 extern crate mount;
@@ -8,7 +9,8 @@ use std::path::Path;
 use iron::prelude::*;
 use iron::{BeforeMiddleware, AfterMiddleware, typemap, status, Handler};
 use iron::error::{IronError};
-use time::precise_time_ns;
+use time::{precise_time_ns};
+use chrono::prelude::{UTC};
 use staticfile::Static;
 use router::{Router, NoRoute};
 
@@ -38,6 +40,7 @@ impl AfterMiddleware for Middleware {
     fn after(&self, req: &mut Request, res: Response) -> IronResult<Response> {
         let delta = precise_time_ns() - *req.extensions.get::<Middleware>().unwrap();
         println!("Request took: {} ms", (delta as f64) / 1000000.0);
+        println!("{:?}: Request took: {} ms", UTC::now(), (delta as f64) / 1000000.0);
         Ok(res)
     }
 
